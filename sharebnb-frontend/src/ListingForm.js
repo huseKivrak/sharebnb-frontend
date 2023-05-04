@@ -1,7 +1,11 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from 'axios';
+import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
+/** ListingForm
+ *
+ */
 function ListingForm() {
   const genres = ["Apartment", "House", "Loft", "Cottage", "Cabin", "Villa"];
   const states = [
@@ -56,34 +60,45 @@ function ListingForm() {
     "WI",
     "WY",
   ];
+const navigate = useNavigate();
+  const handleFileUpload = (event, setFieldValue) => {
+    const files = Array.from(event.target.files);
+    setFieldValue("files", files);
+  };
 
-	const handleFileUpload = (event, setFieldValue) => {
-		const files = Array.from(event.target.files);
-		setFieldValue("files", files);
-	};
-
-	const handleSubmit = async (values) => {
+  const handleSubmit = async (values) => {
     try {
-      console.log('values', values);
+      console.log("values", values);
       // Create a FormData object
       const formData = new FormData();
       // Append the selected file to the FormData object
       // TODO: make this work for multiple files
-      formData.append('image', values.files[0]);
+      formData.append("image", values.files[0]);
       // Make a POST request to the /upload-image endpoint with the FormData object
-      const response = await axios.post('http://localhost:3001/upload-image', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:3001/upload-image",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       // Handle the response from the server
-      console.log(response.data);
+      // delete values.files;
+      values.imageUrl = response.imageUrl;
+
+      const listingResp = await axios.post(
+        "http://localhost:3001/listing/",
+        values
+      );
+        navigate(`/listing/${listingResp.data.listingId}`);
+      //TODO: navigate after adding to db
     } catch (error) {
       // Handle the error
       console.error(error);
     }
   };
-
 
   return (
     <div className="ListingForm d-flex flex-column w-50">
@@ -234,7 +249,9 @@ function ListingForm() {
               </div>
               <div className="col-sm-2">
                 <Field as="select" name="state" className="form-control">
-								<option value="" disabled>State</option>
+                  <option value="" disabled>
+                    State
+                  </option>
                   {states.map((state) => (
                     <option key={state} value={state}>
                       {state}

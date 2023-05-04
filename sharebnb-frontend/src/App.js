@@ -1,17 +1,19 @@
-import './App.css';
-import ListingForm from './ListingForm';
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+
+import RoutesList from './RouteList';
+
+/** App
+ *
+ */
 
 function App() {
-
-  async function handleUpload(data){
-
-console.log("data:", data);
-  }
-
   return (
-    <div className="App">
-      <ListingForm handleUpload={handleUpload}/>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <RoutesList />
+      </div>
+    </BrowserRouter>
   );
 }
 
