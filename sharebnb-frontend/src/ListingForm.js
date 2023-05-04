@@ -64,12 +64,14 @@ function ListingForm() {
 
 	const handleSubmit = async (values) => {
     try {
+      console.log('values', values);
       // Create a FormData object
       const formData = new FormData();
       // Append the selected file to the FormData object
-      formData.append('image', values.files);
+      // TODO: make this work for multiple files
+      formData.append('image', values.files[0]);
       // Make a POST request to the /upload-image endpoint with the FormData object
-      const response = await axios.post('https://localhost:3001/upload-image', formData, {
+      const response = await axios.post('http://localhost:3001/upload-image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -87,14 +89,14 @@ function ListingForm() {
     <div className="ListingForm d-flex flex-column w-50">
       <Formik
         initialValues={{
-          name: "",
-          description: "",
-          price: "",
-          street: "",
-          city: "",
-          state: "",
-          zip: "",
-          genre: "",
+          name: "Listing Name",
+          description: "Listing Description",
+          price: "123",
+          street: "123 Main St.",
+          city: "Tokyo",
+          state: "FL",
+          zip: "12345",
+          genre: "House",
           files: "",
         }}
         validate={(values) => {
