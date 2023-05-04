@@ -6,7 +6,7 @@ function RoutesList() {
 	return (
 		<Routes>
 			<Route
-				path='/listing/:id'
+				path='/listings/:id'
 				element={<Listing />}
 			/>
 			<Route

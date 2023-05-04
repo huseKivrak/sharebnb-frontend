@@ -14,7 +14,6 @@ function App() {
 			<div className='App'>
 				<h1>ShareBnB</h1>
 				<p>ShareBnB is a platform for sharing spaces.</p>
-				<Link to='/listing'>Listings</Link>
 				<Link to='/listing/new'>New Listing</Link>
 				<RoutesList />
 			</div>
