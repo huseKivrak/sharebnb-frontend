@@ -1,11 +1,11 @@
-import './App.css';
-import { BrowserRouter } from 'react-router-dom';
-import NavBar from './NavBar';
-import RoutesList from './RoutesList';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import ShareBnBApi from './api';
-import decode from 'jwt-decode';
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import NavBar from "./NavBar";
+import RoutesList from "./RoutesList";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import ShareBnBApi from "./api";
+import decode from "jwt-decode";
 /** App
  *
  * Props:
@@ -21,42 +21,40 @@ import decode from 'jwt-decode';
  * App -> [NavBar, RoutesList(user, handleLogin)]
  */
 function App() {
-	console.debug('App');
-	const [currentUser, setCurrentUser] = useState(null);
-	const [token, setToken] = useState('');
-	const HOSTNAME = process.env.HOSTNAME || 'http://localhost:3001';
-	console.log('App component');
-	console.log('currentUser', currentUser);
+  console.debug("App");
+  const [currentUser, setCurrentUser] = useState(null);
+  const [token, setToken] = useState("");
+  const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
+  console.log("App component");
+  console.log("currentUser", currentUser);
 
-	async function registerUser(data) {
-		try {
-			const currentToken = await ShareBnBApi.authenticate(data);
-			ShareBnBApi.token = currentToken;
-			setToken(currentToken);
-		} catch (err) {
-			console.error(err);
-		}
-	}
+  async function registerUser(data) {
+    try {
+      const currentToken = await ShareBnBApi.authenticate(data);
+      ShareBnBApi.token = currentToken;
+      setToken(currentToken);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
-	async function handleLogin(username, password) {
-		try {
-			//TODO: confirm login route
-			console.log('username, password', username, password);
+  async function handleLogin(username, password) {
+    try {
+      console.log("username, password", username, password);
 
-			const currentToken = await ShareBnBApi.login(username, password);
-			ShareBnBApi.token = currentToken;
-			console.log('currentToken', currentToken);
-			setToken(currentToken);
+      const currentToken = await ShareBnBApi.login(username, password);
+      ShareBnBApi.token = currentToken;
+      console.log("currentToken", currentToken);
+      setToken(currentToken);
+    } catch (error) {
+      //inauth error handling in LoginForm
+      //TODO: handle errors by type (NotFoundError, BadRequestError)
 
-		} catch (error) {
-			//inauth error handling in LoginForm
-			//TODO: handle errors by type (NotFoundError, BadRequestError)
+      console.error(error);
+    }
+  }
 
-			console.error(error);
-		}
-	}
-
-	useEffect(
+  useEffect(
     function loadUserInfo() {
       console.debug("App useEffect loadUserInfo", "token=", token);
 
@@ -70,16 +68,10 @@ function App() {
             setCurrentUser(currentUser);
           } catch (err) {
             console.error("App loadUserInfo: problem loading", err);
-            setCurrentUser({
-              infoLoaded: true,
-              data: null
-            });
+            setCurrentUser("getCurrentUserError"); //TODO: change;just for debug
           }
         } else {
-          setCurrentUser({
-            infoLoaded: true,
-            data: null
-          });
+          setCurrentUser("noTokenError"); //TODO: change;just for debug
         }
       }
       getCurrentUser();
@@ -87,19 +79,19 @@ function App() {
     [token]
   );
 
-	return (
-		<BrowserRouter>
-			<div className='App'>
-				<h1>ShareBnB</h1>
-				<NavBar />
-				<RoutesList
-					user={currentUser}
-					handleLogin={handleLogin}
-					registerUser={registerUser}
-				/>
-			</div>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <h1>ShareBnB</h1>
+        <NavBar />
+        <RoutesList
+          user={currentUser}
+          handleLogin={handleLogin}
+          registerUser={registerUser}
+        />
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

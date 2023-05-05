@@ -11,6 +11,8 @@ import { Card, CardText, CardBody, CardTitle, CardImg } from "reactstrap";
  * Listing -> ListingCard
  */
 function ListingCard({ listing }) {
+  // listing = listing.value;
+  console.log("listing:", listing);
   return (
     <Card>
       <CardBody>

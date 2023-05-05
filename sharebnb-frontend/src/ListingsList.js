@@ -29,6 +29,7 @@ console.debug("ListingsList");
   useEffect(function getAndSetListingsOnMount() {
     async function getAndSetAllListings() {
       let shownListings = await ShareBnBApi.getListings();
+      // shownListings = shownListings.map((l) => l.value);
       //only show user-owned listings:
       if (userBookings) {
         console.log("userBookings:", userBookings);
@@ -39,7 +40,7 @@ console.debug("ListingsList");
         );
         shownListings = [...bookings];
       }
-
+      console.log("shownListings:", shownListings);
       setListings(shownListings);
     }
     getAndSetAllListings();

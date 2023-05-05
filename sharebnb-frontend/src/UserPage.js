@@ -15,13 +15,13 @@ import { Link } from 'react-router-dom';
  */
 function UserPage({ user }) {
   console.debug("UserPage");
-
+  console.log(user)
   return (
     <div>
       <h1>Hey, {user.firstName}!</h1>
       <h2>Your Listings:</h2>
       <ul>
-        {user.listings.map ? (
+        {user.listings.length ? (
           user.listings.map((l) => (
             <li key={l.id}>
               <Link to={`/listings/${l.id}`}>{l.name}</Link>
@@ -34,7 +34,7 @@ function UserPage({ user }) {
 
       <h2>Your Bookings:</h2>
       <ul>
-        {user.bookings ? (
+        {user.bookings.length ? (
           user.bookings.map((b) => (
             <li key={b.id}>
               <Link to={`/listings/${b.listingId}`}>{b.listingId}</Link>
@@ -46,7 +46,7 @@ function UserPage({ user }) {
       </ul>
       <h2>Inbox:</h2>
       <ul>
-        {user.conversations ? (
+        {user.conversations.length ? (
           user.conversations.map((c) => (
             <li key={c.id}>
               <Link to={`/messages/${c.id}`}>{c.id}</Link>

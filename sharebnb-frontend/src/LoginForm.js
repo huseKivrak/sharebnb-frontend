@@ -23,7 +23,7 @@ function LoginForm({ handleLogin }) {
     let password = evt.target.password.value;
     try {
       await handleLogin(username, password);
-      navigate("/account");
+      navigate("/listings");
     } catch (err) {
       setFormErrors("Invalid username/password!");
     }
