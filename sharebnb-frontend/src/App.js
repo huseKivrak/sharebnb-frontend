@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
+import NavBar from './NavBar';
 import RoutesList from './RouteList';
 
 /** App
@@ -13,8 +12,7 @@ function App() {
 		<BrowserRouter>
 			<div className='App'>
 				<h1>ShareBnB</h1>
-				<p>ShareBnB is a platform for sharing spaces.</p>
-				<Link to='/listing/new'>New Listing</Link>
+				<NavBar />
 				<RoutesList />
 			</div>
 		</BrowserRouter>
