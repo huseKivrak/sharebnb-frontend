@@ -10,6 +10,12 @@ function NavBar() {
         <NavItem>
           <NavLink href="/listing/new">New Listing</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink href="/messages">Inbox</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/bookings">Bookings</NavLink>
+        </NavItem>
       </Nav>
     </Navbar>
   );

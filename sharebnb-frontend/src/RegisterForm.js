@@ -1,7 +1,16 @@
 //import formik components like in ListingForm:
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
+import axios from "axios";
 function RegisterForm() {
+
+
+  const handleSubmit = async (values) => {
+    const response = axios.post("http://localhost:3001/auth/register", values);
+
+    const data = await response.json();
+    console.log("data:", data);
+  };
+
   return (
     <div className="container">
       <h1>Register</h1>
