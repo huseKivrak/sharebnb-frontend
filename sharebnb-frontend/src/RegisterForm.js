@@ -2,7 +2,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router";
-
+import ShareBnBApi from './api';
 /** RegisterForm
  *
  * Props:
@@ -14,16 +14,14 @@ import { useNavigate } from "react-router";
  * RoutesList -> RegisterForm
  */
 
-function RegisterForm() {
+function RegisterForm({registerUser}) {
   const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
   const navigate = useNavigate();
 
   //TODO: confirm register route
   const handleSubmit = async (values) => {
     try {
-      const response = await axios.post(`${HOSTNAME}/auth/register`, values);
-      const data = response.data;
-      console.log("data:", data);
+      registerUser(values);
       navigate("/account");
     } catch (error) {
       console.error(error);

@@ -3,22 +3,28 @@ import axios from "axios";
 const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
 
 class ShareBnBApi {
+  static token;
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${HOSTNAME}/${endpoint}`;
     const params = method === "get" ? data : {};
-
+    const headers = { Authorization: `Bearer ${token}` };
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
       console.error("API Error:", err.response);
-      let message = err.response.data.error.message;
-      throw Array.isArray(message) ? message : [message];
+      // let message = err.response.data.error.message;
+      // throw Array.isArray(message) ? message : [message];
     }
   }
 
-  static async getCurrentUser(id){
+  static async authenticate(data) {
+    let res = await this.request(`auth/register`, { data });
+    return res.token;
+  }
+
+  static async getCurrentUser(id) {
     let res = await this.request(`users/${id}`);
     return res.user;
   }
@@ -38,7 +44,6 @@ class ShareBnBApi {
     return res.listings;
   }
 
-
   static async createListing(data) {
     let res = await this.request(`listings`, data, "post");
     return res.listing;
@@ -54,16 +59,13 @@ class ShareBnBApi {
     return res.message;
   }
 
-
   static async getConversations() {}
   static async getConversation(id) {}
 
   static async getMessages() {}
   static async getMessage(id) {}
 
-  static async getFilteredMessages(filter) {
-
-  }
+  static async getFilteredMessages(filter) {}
 
   static async getBookings() {}
   static async getBooking(id) {}

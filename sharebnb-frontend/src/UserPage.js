@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 /** UserPage
  *
  * Props:
@@ -59,4 +60,3 @@ function UserPage({ user }) {
   );
 }
 export default UserPage;
-

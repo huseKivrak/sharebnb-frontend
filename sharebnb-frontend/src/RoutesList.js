@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import ListingsList from "../ListingsList";
+import ListingsList from "./ListingsList";
 import Listing from "./Listing";
 import ListingForm from "./ListingForm";
-import BookingsList from "./BookingsList";
 import MessagesList from "./MessagesList";
 import UserPage from "./UserPage";
 import Homepage from "./Homepage";
+import RegisterForm from "./RegisterForm";
 
 /** RoutesList
  *
@@ -23,25 +23,29 @@ import Homepage from "./Homepage";
  * [Homepage, RegisterForm, UserPage,
  *            ListingsList, Listing, ListingForm, BookingsList, MessagesList]
  */
-function RoutesList({ user, handleLogin }) {
+function RoutesList({ user, handleLogin, registerUser }) {
   console.debug("RoutesList");
 
   return (
     <Routes>
-      <Route path="/" element={<Homepage handleLogin={handleLogin}/>} />
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/account" element={<UserPage user={user} />} />
-
+      <Route path="/" element={<Homepage handleLogin={handleLogin} />} />
+      <Route path="/register" element={<RegisterForm registerUser={registerUser}/>} />
       <Route path="/listings" element={<ListingsList />} />
       <Route path="/listings/:id" element={<Listing />} />
       <Route path="/listing/new" element={<ListingForm />} />
-
-      <Route path="/bookings" element={<BookingsList bookings={user.bookings}/>} />
-
-      <Route
-        path="/messages"
-        element={<MessagesList conversations={user.conversations} />}
-      />
+      {user && (
+        <div>
+          <Route path="/account" element={<UserPage user={user} />} />
+          <Route
+            path="/bookings"
+            element={<ListingsList userBookings={user.bookings} />}
+          />
+          <Route
+            path="/messages"
+            element={<MessagesList conversations={user.conversations} />}
+          />
+        </div>
+      )}
     </Routes>
   );
 }
