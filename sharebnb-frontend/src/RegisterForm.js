@@ -2,10 +2,21 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router";
+
+/** RegisterForm
+ *
+ * Props:
+ * - None
+ *
+ * States:
+ * - None
+ *
+ * RoutesList -> RegisterForm
+ */
+
 function RegisterForm() {
   const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
   const navigate = useNavigate();
-
 
   //TODO: confirm register route
   const handleSubmit = async (values) => {
