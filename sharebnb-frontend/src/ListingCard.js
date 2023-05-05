@@ -1,4 +1,14 @@
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
+/** ListingCard
+ *
+ * Props:
+ * - listing: {name, description, price, street, city, state, zip, photoUrl}
+ *
+ * States:
+ * - None
+ *
+ * Listing -> ListingCard
+ */
 function ListingCard({ listing }) {
   return (
     <Card>

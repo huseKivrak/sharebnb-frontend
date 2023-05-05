@@ -1,14 +1,22 @@
 //import formik components like in ListingForm:
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
+import { useNavigate } from "react-router";
 function RegisterForm() {
+  const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
+  const navigate = useNavigate();
 
 
+  //TODO: confirm register route
   const handleSubmit = async (values) => {
-    const response = axios.post("http://localhost:3001/auth/register", values);
-
-    const data = await response.json();
-    console.log("data:", data);
+    try {
+      const response = await axios.post(`${HOSTNAME}/auth/register`, values);
+      const data = response.data;
+      console.log("data:", data);
+      navigate("/account");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
