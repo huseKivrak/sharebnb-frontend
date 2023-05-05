@@ -25,6 +25,7 @@ function Listing() {
 				const resp = await axios.get(`${HOSTNAME}/listings/${id}`);
 				console.log('resp', resp);
 				console.log('resp.data', resp.data);
+				console.log("LISTING:", resp.data.listing);
 				setListing(resp.data.listing);
 			}
 			getAndSetListing();

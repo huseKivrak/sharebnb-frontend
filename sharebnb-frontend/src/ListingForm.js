@@ -85,12 +85,15 @@ function ListingForm() {
 					},
 				}
 			);
+			console.log("response:", response);
 			// Handle the response from the server
 			// delete values.files;
-			values.imageUrl = response.imageUrl;
-
+			values.imageUrl = response.data.imageUrl;
+			values.userId = 1;
+				console.log("values123:", values);
+				delete values.files;
 			const listingResp = await axios.post(
-				'http://localhost:3001/listing/',
+				'http://localhost:3001/listings/',
 				values
 			);
 			navigate(`/listing/${listingResp.data.listingId}`);
