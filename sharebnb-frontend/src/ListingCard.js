@@ -1,4 +1,4 @@
-import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
+import { Card, CardText, CardBody, CardTitle, CardImg } from "reactstrap";
 
 /** ListingCard
  *
@@ -13,9 +13,9 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 function ListingCard({ listing }) {
   return (
     <Card>
-      <CardImg top width="100%" src={listing.photoUrl} alt={listing.name} />
       <CardBody>
         <CardTitle>{listing.name}</CardTitle>
+        <CardImg src={listing.photoUrl} alt={listing.name} />
         <CardText>Type: {listing.genre}</CardText>
         <CardText>Info: {listing.description}</CardText>
         <CardText>

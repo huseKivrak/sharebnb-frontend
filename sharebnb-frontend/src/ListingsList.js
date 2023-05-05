@@ -1,27 +1,40 @@
 import ListingCard from "./ListingCard";
 import { useState, useEffect } from "react";
 import { CardColumns } from "reactstrap";
-import axios from "axios";
+import ShareBnBApi from './api';
 
 /** ListingsList
  *
+ *  shows user-owned listings if provided,
+ *  otherwise shows all listings from api
+ *
  * Props:
- * - None
+ * - userListings (optional)
  *
  * States:
- * - listings: [{id, name, description, price, street, city, state, zip, photoUrl}, ...]
+ * - listings: [{id, name, description, price, street, city, state, zip, genre, (photoUrl?)}, ...]
  * - isLoading: boolean
  *
  * RoutesList -> ListingsList -> ListingCard
  */
-function ListingsList() {
+function ListingsList({ userListings = null }) {
   const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(function getAndSetAllListingsOnMount() {
+  /** getAndSetListingsOnMount
+   *
+   */
+  useEffect(function getAndSetListingsOnMount() {
+    //only show user-owned listings:
+    if (userListings) {
+      setListings(userListings);
+      setIsLoading(false);
+      return;
+    }
+
     async function getAndSetAllListings() {
-      const resp = await axios.get("http://localhost:3001/listings");
-      setListings(resp.data.listings);
+      const listings = await ShareBnBApi.getListings();
+      setListings(listings);
     }
     getAndSetAllListings();
     setIsLoading(false);
@@ -30,8 +43,8 @@ function ListingsList() {
   if (isLoading) return <p>Loading...!</p>;
   return (
     <CardColumns>
-      {listings.map((listing) => (
-        <ListingCard key={listing.id} listing={listing} />
+      {listings.map((l) => (
+        <ListingCard key={l.id} listing={l} />
       ))}
     </CardColumns>
   );

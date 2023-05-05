@@ -1,8 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import ListingCard from "./ListingCard";
-
+import ShareBnBApi from "./api";
 /** Listing
  *
  * Props:
@@ -27,8 +26,6 @@ function Listing() {
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
-  const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
-
   /** getAndSetListingOnMount:
    *
    *
@@ -37,8 +34,8 @@ function Listing() {
     function getAndSetListingOnMount() {
       async function getAndSetListing() {
         try {
-          const resp = await axios.get(`${HOSTNAME}/listings/${id}`);
-          setListing(resp.data.listing);
+          const listing = await ShareBnBApi.getListing(id);
+          setListing(listing);
         } catch (error) {
           console.error(error);
           //if listing doesn't exist, redirect to listings page

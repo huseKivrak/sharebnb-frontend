@@ -7,7 +7,7 @@ import { useState } from "react";
  * - None
  *
  * States:
- * - None
+ * - formErrors:  "" | "invalid"
  *
  * RoutesList -> LoginForm
  *

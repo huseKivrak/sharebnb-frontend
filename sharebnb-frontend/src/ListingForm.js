@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
  * RoutesList -> ListingForm
  */
 function ListingForm() {
+  console.debug("ListingForm");
+
   const genres = ["Apartment", "House", "Loft", "Cottage", "Cabin", "Villa"];
   const states = [
     "AL",
@@ -67,6 +69,8 @@ function ListingForm() {
     "WY",
   ];
   const navigate = useNavigate();
+
+
 	/** handleFileUpload
 	 *
 	 */
@@ -148,7 +152,7 @@ function ListingForm() {
           if (!values.city) {
             errors.city = "City Required";
           }
-          if (!values.state || values.state === "State") {
+          if (!values.state) {
             errors.state = "State Required";
           } else if (!/^[A-Z]{2}$/.test(values.state)) {
             errors.state = "State must be a 2-character all caps state code";

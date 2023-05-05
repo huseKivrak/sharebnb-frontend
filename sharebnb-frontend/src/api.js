@@ -61,6 +61,10 @@ class ShareBnBApi {
   static async getMessages() {}
   static async getMessage(id) {}
 
+  static async getFilteredMessages(filter) {
+
+  }
+
   static async getBookings() {}
   static async getBooking(id) {}
 }

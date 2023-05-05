@@ -10,7 +10,11 @@ import Homepage from "./Homepage";
 /** RoutesList
  *
  * Props:
- * - user: {username, firstName, lastName, email}
+ * - user:
+ * { id, username, firstName, lastName, listings, bookings, conversations }
+ *   - listings: [{ id, name, description, price, street, city, state, zip, genre }]
+ *   - bookings: [{ id, ownerId, renterId, listingId, createdAt }]
+ *   - conversations: [{ id, renterId, ownerId, listingId }]
  *
  * States:
  * - None
@@ -32,7 +36,7 @@ function RoutesList({ user, handleLogin }) {
       <Route path="/listings/:id" element={<Listing />} />
       <Route path="/listing/new" element={<ListingForm />} />
 
-      <Route path="/bookings" element={<BookingsList />} />
+      <Route path="/bookings" element={<BookingsList bookings={user.bookings}/>} />
 
       <Route
         path="/messages"
