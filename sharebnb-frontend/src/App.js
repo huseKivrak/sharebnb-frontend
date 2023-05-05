@@ -19,10 +19,10 @@ import axios from "axios";
  *
  * App -> [NavBar, RoutesList(user, handleLogin)]
  */
-const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
 function App() {
   console.debug("App");
   const [currentUser, setCurrentUser] = useState(null);
+  const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
 
   async function handleLogin(data) {
     try {

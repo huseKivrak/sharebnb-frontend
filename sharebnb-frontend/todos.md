@@ -20,6 +20,7 @@
     - organize files into folders (auth, listings, etc.)
 
     - tests
+    - bespoke css files
     - typescript
     - bells
     - whistles
@@ -30,7 +31,7 @@
         - add .isBooked?
         -
     - Bookings
-        - are just filtered bookings;
+        - are just filtered listings;
 
     - Context?
 

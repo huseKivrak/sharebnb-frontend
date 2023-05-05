@@ -1,4 +1,4 @@
-//import the card components from reactstrap:
+
 import { Card, CardText, CardBody, CardTitle } from "reactstrap";
 
 function MessageCard({ message }) {
