@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import ListingsList from "./ListingsList";
+import ListingsList from "../ListingsList";
 import Listing from "./Listing";
 import ListingForm from "./ListingForm";
 import BookingsList from "./BookingsList";
@@ -20,6 +20,8 @@ import Homepage from "./Homepage";
  *            ListingsList, Listing, ListingForm, BookingsList, MessagesList]
  */
 function RoutesList({ user, handleLogin }) {
+  console.debug("RoutesList");
+
   return (
     <Routes>
       <Route path="/" element={<Homepage handleLogin={handleLogin}/>} />

@@ -1,9 +1,25 @@
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+
+/** NavBar
+ *
+ * Props:
+ * - None
+ *
+ * States:
+ * - None
+ *
+ * App -> NavBar
+ */
 function NavBar() {
+  console.debug("NavBar");
+
   return (
     <Navbar color="light" light expand="md">
       <NavbarBrand href="/">ShareBnB</NavbarBrand>
       <Nav className="mr-auto" navbar>
+        <NavItem>
+          <NavLink href="/account">Account</NavLink>
+        </NavItem>
         <NavItem>
           <NavLink href="/listings">Listings</NavLink>
         </NavItem>

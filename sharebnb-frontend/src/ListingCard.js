@@ -1,4 +1,5 @@
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
+
 /** ListingCard
  *
  * Props:
@@ -18,7 +19,7 @@ function ListingCard({ listing }) {
         <CardText>Type: {listing.genre}</CardText>
         <CardText>Info: {listing.description}</CardText>
         <CardText>
-          Address: {listing.street}, {listing.city}, {listing.state}{" "}
+          Address: {listing.street}, {listing.city}, {listing.state}
           {listing.zip}
         </CardText>
         <CardText>Cost: ${listing.price}/day</CardText>
