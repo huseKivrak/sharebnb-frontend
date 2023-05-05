@@ -1,10 +1,10 @@
 
 # to-dos:
-    ## components:
-        - BookingsList
-        - MessagesList
-            - getConversations?
-        - UserPage
+
+## components:
+ - BookingsList (unnecessary?)
+ - MessagesList
+ <!-- - UserPage -->
 
 
     - confirm all api calls, routenames,
@@ -12,11 +12,28 @@
 
 
 
+    <!-- - replace all api calls with methods from ShareBnBApi class -->
+
 # would be nice:
     - allow multiple photo uploads per listing
+    - admin authorization
     - organize files into folders (auth, listings, etc.)
-    - replace all api calls with methods from ShareBnBApi class
-    - rename poorly named variables (HOSTNAME -> BASE_URL, etc.)
+
     - tests
-    - bespoke css files
+    - typescript
+    - bells
+    - whistles
+
+# design options:
+
+    - Listings
+        - add .isBooked?
+        -
+    - Bookings
+        - are just filtered bookings;
+
+    - Context?
+
+    - ListingForm -> Formik?
+        - lower setTimeout?
 
