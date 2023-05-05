@@ -21,7 +21,7 @@ function RegisterForm({registerUser}) {
   //TODO: confirm register route
   const handleSubmit = async (values) => {
     try {
-      registerUser(values);
+      await registerUser(values);
       navigate("/account");
     } catch (error) {
       console.error(error);

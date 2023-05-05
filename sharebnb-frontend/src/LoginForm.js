@@ -1,5 +1,6 @@
 import { Alert } from "reactstrap";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 /** LoginForm
  *
@@ -14,13 +15,15 @@ import { useState } from "react";
  */
 function LoginForm({ handleLogin }) {
   const [formErrors, setFormErrors] = useState("");
+  const navigate = useNavigate();
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
     let username = evt.target.username.value;
     let password = evt.target.password.value;
     try {
-      handleLogin(username, password);
+      await handleLogin(username, password);
+      navigate("/account");
     } catch (err) {
       setFormErrors("Invalid username/password!");
     }

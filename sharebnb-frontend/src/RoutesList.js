@@ -34,7 +34,7 @@ function RoutesList({ user, handleLogin, registerUser }) {
       <Route path="/listings/:id" element={<Listing />} />
       <Route path="/listing/new" element={<ListingForm />} />
       {user && (
-        <div>
+        <>
           <Route path="/account" element={<UserPage user={user} />} />
           <Route
             path="/bookings"
@@ -44,7 +44,7 @@ function RoutesList({ user, handleLogin, registerUser }) {
             path="/messages"
             element={<MessagesList conversations={user.conversations} />}
           />
-        </div>
+        </>
       )}
     </Routes>
   );

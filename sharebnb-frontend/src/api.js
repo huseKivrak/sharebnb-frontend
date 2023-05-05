@@ -4,12 +4,13 @@ const HOSTNAME = process.env.HOSTNAME || "http://localhost:3001";
 
 class ShareBnBApi {
   static token;
+
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${HOSTNAME}/${endpoint}`;
     const params = method === "get" ? data : {};
-    const headers = { Authorization: `Bearer ${token}` };
+    const headers = { Authorization: `Bearer ${this.token}` };
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
@@ -20,7 +21,12 @@ class ShareBnBApi {
   }
 
   static async authenticate(data) {
-    let res = await this.request(`auth/register`, { data });
+    let res = await this.request(`auth/register`, data, 'post');
+    return res.token;
+  }
+
+  static async login(username, password) {
+    let res = await this.request(`auth/login`, {username, password}, 'post');
     return res.token;
   }
 
